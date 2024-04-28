@@ -50,7 +50,7 @@ public class Theater
      */
     public boolean reserveSeat(int show, int row, int col, String phone)
     {
-        if(seats[show][row][col] == "")
+        if(seats[show][row][col].equals(""))
         {
             seats[show][row][col] = phone; //add the user's phone number
             return true; //the seat is empty

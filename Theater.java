@@ -1,4 +1,4 @@
-
+import java.util.Date;
 /**
  * Write a description of class Theater here.
  *
@@ -39,16 +39,118 @@ public class Theater
             seats[i] = this.layout;
         }
     }
-
+    
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Reserves a seat if it is empty (and it exists)
+     * 
+     * @param  show  The index of the show that is being reserved
+     * @param  row  The row of the seat being reserved
+     * @param  col  The column of the seat being reserved
+     * @return boolean  Whether or not the seat was available.
      */
-    public int sampleMethod(int y)
+    public boolean reserveSeat(int show, int row, int col, String phone)
     {
-        // put your code here
-        return 0;
+        if(seats[show][row][col] == "")
+        {
+            seats[show][row][col] = phone; //add the user's phone number
+            return true; //the seat is empty
+        }
+        return false; //the seat is taken
     }
+    
+    /**
+     * Internal method of reserveRow that checks the availibility of seats
+     * 
+     * @param  show  The index of the show that is being reserved
+     * @param  row  The row of the seat being reserved
+     * @param  col  The column of the seat being reserved
+     * @return boolean  Whether or not the seats were available.
+     */
+    private boolean checkRow(int show, int row, int sCol, int eCol)
+    {
+        for(int i = sCol; i < eCol; i++)
+        {
+            if(seats[show][row][i].equals(""))
+            {
+                continue;
+            } else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Reserves a seat if it is empty (and it exists)
+     * 
+     * @param  show  The index of the show that is being reserved
+     * @param  row  The row of the seat being reserved
+     * @param  sCol  The starting column of the seats being reserved, inclusive
+     * @param  eCol  The ending column of the seats being reserved, exclusive
+     * @return boolean  Whether or not the seats were available.
+     */
+    public boolean reserveRange(int show, int row, int sCol, int eCol, String phone)
+    {
+        if(checkRow(show,row,sCol,eCol))
+        {
+            for(int i = sCol; i < eCol; i++)
+            {
+                seats[show][row][i] = phone; //add the user's phone number
+            }
+            return true; //the seats were empty
+        }
+        return false; //the seats were taken
+    }
+    
+    /**
+     * DISABLED UNTIL SHOW CLASS IS ADDED
+     * Modifies the Theater's schedule
+     *
+     * @param  index  The entry to modify
+     * @param  show   The show to add to the schedule
+     */
+    /*
+    public void setShowing(int index, Show show)
+    {
+        schedule[index] = show;
+    }
+    */
+   
+    /**
+     * DISABLED UNTIL SHOW CLASS IS ADDED
+     * Modifies the Theater's schedule
+     *
+     * @param  index  The entry to modify
+     * @return    The show at the provided index
+     */
+    /*
+    public Show getShowing(int index)
+    {
+        return schedule[index];
+    }
+    */
+   
+    /**
+     * DISABLED UNTIL SHOW CLASS IS ADDED
+     * Updates the schedule to match the provided time
+     *
+     * @param  date  The time to update to
+     */
+    /*
+    public void updateSchedule(Date date)
+    {
+        if(schedule[0].getDate().before(date)) //has the showing passed?
+        {
+            for(int i = 0; i < schedule.length - 1; i++)
+            {
+                schedule[i] = schedule[i+1]; //shift schedules over
+                seats[i] = seats[i+1]; //shift seatings over to match
+            }
+            schedule[schedule.length - 1] = //no show constructor atm, it makes a blank one
+            seats[schedule.length - 1] = layout;
+            updateSchedule(date); //Recursive check in case multiple shows pass
+        }
+    }
+    */
 }

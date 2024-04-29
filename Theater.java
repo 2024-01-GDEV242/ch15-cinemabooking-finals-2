@@ -11,7 +11,7 @@ public class Theater
     private String name;
     private String[][] layout;
     private String[][][] seats; //[showing][row][column]
-    //Private Show[] schedule; (will add once others are done)
+    private Show[] schedule; //(will add once others are done)
     /**
      * Constructor for objects of class Theater
      */
@@ -104,53 +104,47 @@ public class Theater
     }
     
     /**
-     * DISABLED UNTIL SHOW CLASS IS ADDED
      * Modifies the Theater's schedule
      *
      * @param  index  The entry to modify
      * @param  show   The show to add to the schedule
      */
-    /*
     public void setShowing(int index, Show show)
     {
         schedule[index] = show;
     }
-    */
+    
    
     /**
-     * DISABLED UNTIL SHOW CLASS IS ADDED
      * Modifies the Theater's schedule
      *
      * @param  index  The entry to modify
      * @return    The show at the provided index
      */
-    /*
     public Show getShowing(int index)
     {
         return schedule[index];
     }
-    */
+    
    
     /**
-     * DISABLED UNTIL SHOW CLASS IS ADDED
      * Updates the schedule to match the provided time
      *
      * @param  date  The time to update to
      */
-    /*
     public void updateSchedule(Date date)
     {
-        if(schedule[0].getDate().before(date)) //has the showing passed?
+        if(schedule[0] != null && schedule[0].getDate().before(date)) //has the showing passed?
         {
             for(int i = 0; i < schedule.length - 1; i++)
             {
                 schedule[i] = schedule[i+1]; //shift schedules over
                 seats[i] = seats[i+1]; //shift seatings over to match
             }
-            schedule[schedule.length - 1] = //no show constructor atm, it makes a blank one
+            schedule[schedule.length - 1] = null;//no show constructor atm, it makes a blank one
             seats[schedule.length - 1] = layout;
             updateSchedule(date); //Recursive check in case multiple shows pass
         }
     }
-    */
+    
 }

@@ -2,35 +2,41 @@ import java.util.Date;
 /**
  * Write a description of class Show here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Collie Clarke
+ * @version    2024.4.29
  */
 public class Show
 {
     // instance variables - replace the example below with your own
-    private String showName;
+    private String name;
     private Date date;
 
     /**
      * Constructor for objects of class Show
      */
-    public Show(String showName, Date date)
+    public Show(String name, Date date)
     {
         // initialise instance variables
-        this.showName = showName;
+        this.name = name;
+        this.date = date;
     }
 
     /**
-     *
+     * 
      */
-    public void setShow(String showName)
+    public void setName(String name)
     {
         // put your code here
-        this.showName = showName;
+        this.name = name;
     }
     
-    public String getShow()
+    public String getName()
     {
-        return showName;
+        return name;
+    }
+    
+    public Date getDate()
+    {
+        return date;
     }
 }

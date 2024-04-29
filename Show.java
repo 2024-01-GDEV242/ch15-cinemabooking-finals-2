@@ -22,7 +22,8 @@ public class Show
     }
 
     /**
-     * 
+     * Sets the name of the show.
+     * @Param name
      */
     public void setName(String name)
     {
@@ -30,11 +31,19 @@ public class Show
         this.name = name;
     }
     
+    /**
+     * Gets the name of the show.
+     * @return name
+     */
     public String getName()
     {
         return name;
     }
     
+    /**
+     * Gets the date of the show.
+     * @return date
+     */
     public Date getDate()
     {
         return date;

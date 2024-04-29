@@ -1,4 +1,4 @@
-
+import java.util.Date;
 /**
  * Write a description of class Show here.
  *
@@ -8,26 +8,29 @@
 public class Show
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private String showName;
+    private Date date;
 
     /**
      * Constructor for objects of class Show
      */
-    public Show()
+    public Show(String showName, Date date)
     {
         // initialise instance variables
-        x = 0;
+        this.showName = showName;
     }
 
     /**
-     * An example of a method - replace this comment with your own
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
      */
-    public int sampleMethod(int y)
+    public void setShow(String showName)
     {
         // put your code here
-        return x + y;
+        this.showName = showName;
+    }
+    
+    public String getShow()
+    {
+        return showName;
     }
 }

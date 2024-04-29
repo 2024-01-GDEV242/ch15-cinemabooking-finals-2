@@ -2,6 +2,10 @@
 
 ## Developers
 - Paulo Santos
+
  
 ## Developers
 - Collie Clarke
+
+- Andrew Steidle
+

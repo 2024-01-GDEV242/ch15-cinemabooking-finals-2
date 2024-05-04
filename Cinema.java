@@ -24,7 +24,7 @@ public class Cinema
         
         do {
             System.out.println("------------------------------------");
-            System.out.println(":Cinema Booking System by BS and KU:");
+            System.out.println(":Cinema Booking System by Group 2:");
 	    System.out.println("------------------------------------\n");
 	    System.out.println("Please Enter 1 to Add Theatre");
 	    System.out.println("Please Enter 2 to Add Show");

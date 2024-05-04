@@ -13,7 +13,7 @@ public class Customer
     String surname;
     String street;
     int streetNumber;
-    int plz;
+    int post;
     String city;
 
     /**
@@ -57,9 +57,9 @@ public class Customer
         this.streetNumber = streetNumber;
     }
     
-    public void setPLZ(int plz)
+    public void setPostal(int post)
     {
-        this.plz = plz;
+        this.post = post;
     }
     
     public void setCity(String city)
@@ -69,8 +69,8 @@ public class Customer
     
     public void printCostumer()
     {
-        System.out.print(surname + " " + name);
-	System.out.println(street + " " + streetNumber);
-	System.out.println(plz + " " + city);
+    System.out.print(surname + " " + name);
+    System.out.println(street + " " + streetNumber);
+    System.out.println(post + " " + city);
     }
 }

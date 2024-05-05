@@ -23,7 +23,7 @@ public class Show
 
     /**
      * Sets the name of the show.
-     * @Param name
+     * @param name the name of the show.
      */
     public void setName(String name)
     {
@@ -33,7 +33,7 @@ public class Show
     
     /**
      * Gets the name of the show.
-     * @return name
+     * @return the name of the show
      */
     public String getName()
     {
@@ -42,7 +42,7 @@ public class Show
     
     /**
      * Gets the date of the show.
-     * @return date
+     * @return the date the show starts
      */
     public Date getDate()
     {

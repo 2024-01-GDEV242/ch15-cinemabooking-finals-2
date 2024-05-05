@@ -95,6 +95,19 @@ public class CinemaBookingSystem
     {
         return theaters.get(tIndex).reserveRange(sIndex,row,sCol,eCol,phone);
     }
+    
+    /**
+     * Updates all Theaters to the provided time, removing any showings that have passed from shedules.
+     * Clears layouts of showings and shifts the arrays, leaving the last entry blank.
+     * @param date The Date/Time to update to.
+     */
+    public void updateSchedule(Date date)
+    {
+        for(int i = 0; i < theaters.size(); i++)
+        {
+            theaters.get(i).updateSchedule(date);
+        }
+    }
 
     /**
      * An example of a method - replace this comment with your own

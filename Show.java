@@ -8,8 +8,8 @@ import java.util.Date;
 public class Show
 {
     // instance variables - replace the example below with your own
-    private String name;
-    private Date date;
+    private String name; //The name of the show
+    private Date date; //The date the show starts
 
     /**
      * Constructor for objects of class Show

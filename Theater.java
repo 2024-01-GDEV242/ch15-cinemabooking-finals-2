@@ -15,7 +15,7 @@ public class Theater
     /**
      * Constructor for objects of class Theater
      */
-    public Theater(String name, int[][] layout, int maxShowings)
+    public Theater(String name, boolean[][] layout, int maxShowings)
     {
         // initialise instance variables
         this.name = name;
@@ -24,12 +24,12 @@ public class Theater
         {
             for(int b = 0; b < layout[0].length; b++)
             {
-                if(layout[a][b] == 0) //null seat
-                {
-                    seats[0][a][b] = "null";
-                } else
+                if(layout[a][b]) //true means seat exists
                 {
                     seats[0][a][b] = "";
+                } else //false means it does not
+                {
+                    seats[0][a][b] = "null";
                 }
             }
         }

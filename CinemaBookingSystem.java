@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 /**
- * Write a description of class CinemaBookingSystem here.
+ * The class that holds the theaters of the cinema and manages them. 
+ * Serves as an interface for using the system
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Andrew Steidle
+ * @version 2024.5.5
  */
 public class CinemaBookingSystem
 {
@@ -19,6 +22,7 @@ public class CinemaBookingSystem
     {
         // initialise instance variables
         this.maxShowings = maxShowings;
+        theaters = new ArrayList<Theater>();
     }
     
     /**
@@ -28,6 +32,16 @@ public class CinemaBookingSystem
     public int getMaxShowings()
     {
         return maxShowings;
+    }
+    
+    /**
+     * Adds a Theater to the cinema
+     * @param name The name of the theater
+     * @param layout The layout of seats in the theater, true marks a place where a seat exists.
+     */
+    public void addTheater(String name, boolean[][] layout)
+    {
+        theaters.add(new Theater(name,layout,maxShowings));
     }
 
     /**

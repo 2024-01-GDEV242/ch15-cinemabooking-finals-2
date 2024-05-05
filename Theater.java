@@ -119,7 +119,7 @@ public class Theater
      * Modifies the Theater's schedule
      *
      * @param  index  The entry to modify
-     * @return    The show at the provided index
+     * @return Show The show at the provided index
      */
     public Show getShowing(int index)
     {

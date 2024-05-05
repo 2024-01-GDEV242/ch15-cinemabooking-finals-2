@@ -27,7 +27,7 @@ public class CinemaBookingSystem
     
     /**
      * Accessor Method for maxShowings
-     * @return the maximum number of showings each theater in the system can hold
+     * @return  int  the maximum number of showings each theater in the system can hold
      */
     public int getMaxShowings()
     {
@@ -42,6 +42,28 @@ public class CinemaBookingSystem
     public void addTheater(String name, boolean[][] layout)
     {
         theaters.add(new Theater(name,layout,maxShowings));
+    }
+    
+    /**
+     * Adds a show to the schedule of the Theater at a given index, at another given index.
+     * @param tIndex The index of the Theater to add the Show to.
+     * @param sIndex The index of the Theater's schedule to add the show to.
+     * @param show The Show to add to the Theater's schedule
+     */
+    public void addShowing(int tIndex, int sIndex, Show show)
+    {
+        theaters.get(tIndex).setShowing(sIndex, show);
+    }
+    
+    /**
+     * Reads the schedule of Theater at a given index, at another given index.
+     * @param tIndex The index of the Theater to read the schedule of.
+     * @param sIndex The index of the Theater's schedule to read.
+     * @return Show The Show at the index in the schedule.
+     */
+    public Show getShowing(int tIndex, int sIndex)
+    {
+        return theaters.get(tIndex).getShowing(sIndex);
     }
 
     /**

@@ -65,6 +65,36 @@ public class CinemaBookingSystem
     {
         return theaters.get(tIndex).getShowing(sIndex);
     }
+    
+    /**
+     * Reserves a seat in a Theater if it is empty (and it exists)
+     * 
+     * @param  tIndex The index of the theater that is being reserved
+     * @param  sIndex  The index of the show that is being reserved
+     * @param  row  The row of the seat being reserved
+     * @param  col  The column of the seat being reserved
+     * @return boolean  Whether or not the seat was available.
+     */
+    public boolean reserveSeat(int tIndex, int sIndex, int row, int col, String phone)
+    {
+        return theaters.get(tIndex).reserveSeat(sIndex,row,col,phone);
+    }
+    
+    /**
+     * Reserves a range of seats if all are empty (and they exist).
+     * Will not reserve any seats in the row if any are taken.
+     *
+     * @param  tIndex The index of the theater that is being reserved
+     * @param  sIndex  The index of the show that is being reserved
+     * @param  row  The row of the seat being reserved
+     * @param  sCol  The starting column of the seats being reserved, inclusive
+     * @param  eCol  The ending column of the seats being reserved, exclusive
+     * @return boolean  Whether or not the seats were available. 
+     */
+    public boolean reserveRange(int tIndex, int sIndex, int row, int sCol, int eCol, String phone)
+    {
+        return theaters.get(tIndex).reserveRange(sIndex,row,sCol,eCol,phone);
+    }
 
     /**
      * An example of a method - replace this comment with your own

@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 /**
  * The class that holds the theaters of the cinema and manages them. 
  * Serves as an interface for using the system
@@ -108,7 +110,44 @@ public class CinemaBookingSystem
             theaters.get(i).updateSchedule(date);
         }
     }
-
+    
+    /**
+     * Prints the entire CBS schedule in chronological order
+     */
+    public void printSchedule(long start)
+    {
+        Date earliest = new Date(0);
+        Date last = new Date(start);
+        int tIndex = -1;
+        int sIndex = -1;
+        //Find the earliest 
+        for(int i = 0; i < theaters.size(); i++)
+        {
+            for(int a = 0; a < maxShowings; a++)
+            {
+                Date b = theaters.get(i).getShowing(a).getDate();
+                if((b.before(earliest) || earliest.equals(new Date(0))) && b.after(last))
+                {
+                    tIndex = i;
+                    sIndex = a;
+                    earliest = b;
+                }
+            }
+        }
+        
+        if(tIndex > -1) //if tIndex never changes, then all entries have been printed
+        {   //getTime converts the date to a long
+            GregorianCalendar c = new GregorianCalendar();
+            c.setTime(earliest);
+            //
+            System.out.println(theaters.get(tIndex).getShowing(sIndex).getName() +
+            "Airing in "+ theaters.get(tIndex).getName() + "on:" + 
+            c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + //+1 beacuse January is 0 for some reason
+            c.get(Calendar.YEAR));
+            System.out.println(theaters.get(tIndex).getShowing(sIndex).getDescription());
+            printSchedule(earliest.getTime());//Recursive call to function with th
+        }
+    }
     /**
      * An example of a method - replace this comment with your own
      *

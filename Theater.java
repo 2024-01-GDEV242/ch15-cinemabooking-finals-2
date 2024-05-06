@@ -147,4 +147,8 @@ public class Theater
         }
     }
     
+    public String getName()
+    {
+        return name;
+    }
 }

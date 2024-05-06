@@ -148,11 +148,22 @@ public class Theater
         }
     }
     
+    /**
+     * Prints the seating chart to the console for the given showing
+     * 
+     * @param index The index of the showing to print.
+     */
     public void printSeating(int index)
     {
+        System.out.print("Row   Col:   "); //formatting
+        for(int b = 0; b < seats[index][0].length; b++)
+        {
+            System.out.print(b + "               ");
+        }
+        System.out.println(); //New line
         for(int i = 0; i < seats[index].length; i++)
         {
-            System.out.print(i + ": "); //Prints the column index
+            System.out.print(i + ":    "); //Prints the column index
             for(int a = 0; a < seats[index][i].length; a++)
             {
                 System.out.print("[" + seats[index][i][a] + "]"); //Prints the seat in an array

@@ -208,6 +208,12 @@ public class CinemaBookingSystem
         }
     }
     
+    /**
+     * Prints the seating chart to the console for the given showing
+     * 
+     * @param tIndex The index of the theater to print.
+     * @param sIndex The index of the showing to print.
+     */
     public void printSeating(int tIndex, int sIndex)
     {
         theaters.get(tIndex).printSeating(sIndex);

@@ -58,6 +58,7 @@ public class CinemaBookingSystem
         c = new GregorianCalendar(2024,6,10,17,0);//May 10 2024 5:00 PM
         cbs.getTheater(1).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
         cbs.printSchedule(0,-1);
+        cbs.printSeating(0,0);
     }
     
     /**
@@ -205,6 +206,11 @@ public class CinemaBookingSystem
             System.out.println(theaters.get(tIndex).getShowing(sIndex).getDescription());
             printSchedule(earliest.getTime(),tIndex);//Recursive call to function searching for only after this entry
         }
+    }
+    
+    public void printSeating(int tIndex, int sIndex)
+    {
+        theaters.get(tIndex).printSeating(sIndex);
     }
     /**
      * An example of a method - replace this comment with your own

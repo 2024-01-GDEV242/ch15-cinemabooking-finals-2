@@ -26,10 +26,10 @@ public class Theater
             {
                 if(layout[a][b]) //true means seat exists
                 {
-                    seats[0][a][b] = "";
+                    seats[0][a][b] = "seat available";
                 } else //false means it does not
                 {
-                    seats[0][a][b] = "null";
+                    seats[0][a][b] = "              ";
                 }
             }
         }
@@ -51,7 +51,7 @@ public class Theater
      */
     public boolean reserveSeat(int show, int row, int col, String phone)
     {
-        if(seats[show][row][col].equals(""))
+        if(seats[show][row][col].equals("seat available"))
         {
             seats[show][row][col] = phone; //add the user's phone number
             return true; //the seat is empty
@@ -71,7 +71,7 @@ public class Theater
     {
         for(int i = sCol; i < eCol; i++)
         {
-            if(seats[show][row][i].equals(""))
+            if(seats[show][row][i].equals("seat available"))
             {
                 continue;
             } else
@@ -146,6 +146,23 @@ public class Theater
             seats[schedule.length - 1] = layout;
             updateSchedule(date); //Recursive check in case multiple shows pass
         }
+    }
+    
+    public void printSeating(int index)
+    {
+        for(int i = 0; i < seats[index].length; i++)
+        {
+            System.out.print(i + ": "); //Prints the column index
+            for(int a = 0; a < seats[index][i].length; a++)
+            {
+                System.out.print("[" + seats[index][i][a] + "]"); //Prints the seat in an array
+            }
+            System.out.println();//New line
+        }
+        //examples of uniformly sized seats
+        //[0-000-000-0000] seat reserved
+        //[seat available] empty seat
+        //[              ] null seat
     }
     
     public String getName()

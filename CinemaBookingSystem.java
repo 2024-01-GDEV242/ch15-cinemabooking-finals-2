@@ -58,8 +58,10 @@ public class CinemaBookingSystem
         c = new GregorianCalendar(2024,9,5,17,0);//May 10 2024 5:00 PM
         cbs.getTheater(1).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
         cbs.printSchedule();
+        System.out.println();
         cbs.printSeating(0,0);
         cbs.printSeating(1,0);
+        System.out.println();
         if(cbs.reserveSeat(0,0,1,1,"1-908-444-5825")) //valid seat
         {
             System.out.println("return test success");
@@ -76,14 +78,17 @@ public class CinemaBookingSystem
         cbs.printSeating(0,2);
         c = new GregorianCalendar(2024,9,5,12,30);
         //demonstrate the schedules shifting
-        System.out.println("Updated");
+        System.out.println();
+        System.out.println("Updated schedule to May 10th 2024 at 12:30 PM");
         cbs.updateSchedule(c.getTime());
         cbs.printSeating(0,0);
         cbs.printSeating(0,1);
         cbs.printSeating(0,2);
         cbs.cancelReservation(0,0,1,1);
-        System.out.println("A1 1:30 row 1 1 cancelled");
+        System.out.println();
+        System.out.println("A1 1:30 PM reservation 1 1 cancelled");
         cbs.printSeating(0,0);
+        System.out.println();
         System.out.println("2 days skipped");
         c = new GregorianCalendar(2024,12,5,12,40);
         cbs.updateSchedule(c.getTime());

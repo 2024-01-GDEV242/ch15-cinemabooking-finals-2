@@ -38,11 +38,11 @@ public class CinemaBookingSystem
         };
         cbs.addTheater("A1",layout);
         //Note: The months are indexed at 0, the days wihtin the month are not
-        GregorianCalendar c = new GregorianCalendar(2024,6,10,12,0);//May 10 2024 12:00 PM
+        GregorianCalendar c = new GregorianCalendar(2024,9,5,12,0);//May 10 2024 12:00 PM
         cbs.getTheater(0).setShowing(0, new Show("Action movie","Thrilling movie with cool vfx",c.getTime()));
-        c = new GregorianCalendar(2024,6,10,13,30);//May 10 2024 1:30 PM
+        c = new GregorianCalendar(2024,9,5,13,30);//May 10 2024 1:30 PM
         cbs.getTheater(0).setShowing(1, new Show("Mystery movie","Suspensful movie that scares you",c.getTime()));
-        c = new GregorianCalendar(2024,6,10,15,50);//May 10 2024 3:50 PM
+        c = new GregorianCalendar(2024,9,5,15,50);//May 10 2024 3:50 PM
         cbs.getTheater(0).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
         boolean[][] layout2 = {
             {false,true,true,true,false},
@@ -51,14 +51,15 @@ public class CinemaBookingSystem
             {true,true,true,true,true},
         };
         cbs.addTheater("A2",layout2);
-        c = new GregorianCalendar(2024,6,10,12,0);//May 10 2024 12:00 PM
+        c = new GregorianCalendar(2024,9,5,12,0);//May 10 2024 12:00 PM
         cbs.getTheater(1).setShowing(0, new Show("Mystery movie","Suspensful movie that scares you",c.getTime()));
-        c = new GregorianCalendar(2024,6,10,16,0);//May 10 2024 4:00 PM
+        c = new GregorianCalendar(2024,9,5,16,0);//May 10 2024 4:00 PM
         cbs.getTheater(1).setShowing(1, new Show("Action movie","Thrilling movie with cool vfx",c.getTime()));
-        c = new GregorianCalendar(2024,6,10,17,0);//May 10 2024 5:00 PM
+        c = new GregorianCalendar(2024,9,5,17,0);//May 10 2024 5:00 PM
         cbs.getTheater(1).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
         cbs.printSchedule();
         cbs.printSeating(0,0);
+        cbs.printSeating(1,0);
         if(cbs.reserveSeat(0,0,1,1,"1-908-444-5825")) //valid seat
         {
             System.out.println("return test success");
@@ -73,13 +74,23 @@ public class CinemaBookingSystem
         cbs.printSeating(0,0); //only 5825 is displayed
         cbs.printSeating(0,1); //only 
         cbs.printSeating(0,2);
-        c = new GregorianCalendar(2024,6,10,12,30);
+        c = new GregorianCalendar(2024,9,5,12,30);
         //demonstrate the schedules shifting
         System.out.println("Updated");
         cbs.updateSchedule(c.getTime());
         cbs.printSeating(0,0);
         cbs.printSeating(0,1);
         cbs.printSeating(0,2);
+        cbs.cancelReservation(0,0,1,1);
+        System.out.println("A1 1:30 row 1 1 cancelled");
+        cbs.printSeating(0,0);
+        System.out.println("2 days skipped");
+        c = new GregorianCalendar(2024,12,5,12,40);
+        cbs.updateSchedule(c.getTime());
+        cbs.printSeating(0,0);
+        cbs.printSeating(0,1);
+        cbs.printSeating(0,2);
+
     }
     
     /**

@@ -155,6 +155,8 @@ public class Theater
      */
     public void printSeating(int index)
     {
+        System.out.println("Theater " + name + "'s showing of: " + schedule[index].getName() +
+                            " on: " + schedule[index].timeString());
         System.out.print("Row   Col:   "); //formatting
         for(int b = 0; b < seats[index][0].length; b++)
         {

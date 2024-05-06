@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 /**
  * The Show class represents a movie that is in a Theater's schedule.
  *
@@ -69,5 +71,35 @@ public class Show
     public Date getDate()
     {
         return date;
+    }
+    
+    /**
+     * Returns the date of the showing as a string.
+     * 
+     * @return String The date and time of the showing in MDY 12 Hour format.
+     */
+    public String timeString()
+    {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(date);
+        String hour = "" + c.get(Calendar.HOUR);
+        if(c.get(Calendar.HOUR) == 0)
+        {
+            hour = "12";
+        }
+        String period = "PM";
+        if(c.get(Calendar.AM_PM) == 0) 
+        {
+            period = "AM";
+        }
+        String min = "" + c.get(Calendar.MINUTE); // :0x for minutes less than 10
+        if(c.get(Calendar.MINUTE) < 10)
+        {
+            min = "0" + min;
+        }
+        String value = c.get(Calendar.DAY_OF_MONTH) + "/" + 
+        (c.get(Calendar.MONTH) + 1) + "/" + //+1 beacuse January is 0 for some reason
+        c.get(Calendar.YEAR) + " at " + hour + ":" + min + " " + period;
+        return value;
     }
 }

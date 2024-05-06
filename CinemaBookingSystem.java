@@ -181,28 +181,9 @@ public class CinemaBookingSystem
         
         if(tIndex > -1) //if tIndex never changes, then all entries have been printed
         {   //getTime converts the date to a long
-            GregorianCalendar c = new GregorianCalendar();
-            c.setTime(earliest);
-            String hour = "" + c.get(Calendar.HOUR);
-            if(c.get(Calendar.HOUR) == 0)
-            {
-                hour = "12";
-            }
-            String period = "PM";
-            if(c.get(Calendar.AM_PM) == 0) 
-            {
-                period = "AM";
-            }
-            String min = "" + c.get(Calendar.MINUTE); // :0x for minutes less than 10
-            if(c.get(Calendar.MINUTE) < 10)
-            {
-                min = "0" + min;
-            }
-            //
-            System.out.println(theaters.get(tIndex).getShowing(sIndex).getName() +
-            " Airing in theater "+ theaters.get(tIndex).getName() + " on:" + 
-            c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + //+1 beacuse January is 0 for some reason
-            c.get(Calendar.YEAR) + " at " + hour + ":" + min + " " + period);
+            Theater t = theaters.get(tIndex);
+            System.out.println(t.getShowing(sIndex).getName() +
+            " Airing in theater "+ t.getName() + " on: " + t.getShowing(sIndex).timeString());
             System.out.println(theaters.get(tIndex).getShowing(sIndex).getDescription());
             printSchedule(earliest.getTime(),tIndex);//Recursive call to function searching for only after this entry
         }

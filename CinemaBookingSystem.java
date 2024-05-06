@@ -27,6 +27,39 @@ public class CinemaBookingSystem
         theaters = new ArrayList<Theater>();
     }
     
+    public static void main(String args[])
+    {
+        CinemaBookingSystem cbs = new CinemaBookingSystem(3);
+        boolean[][] layout = {
+            {false,true,true,true,false},
+            {true,true,true,true,true},
+            {true,true,true,true,true},
+            {true,false,false,false,true},
+        };
+        cbs.addTheater("A1",layout);
+        //Note: The months are indexed at 0, the days wihtin the month are not
+        GregorianCalendar c = new GregorianCalendar(2024,6,10,12,0);//May 10 2024 12:00 PM
+        cbs.getTheater(0).setShowing(0, new Show("Action movie","Thrilling movie with cool vfx",c.getTime()));
+        c = new GregorianCalendar(2024,6,10,13,30);//May 10 2024 1:30 PM
+        cbs.getTheater(0).setShowing(1, new Show("Mystery movie","Suspensful movie that scares you",c.getTime()));
+        c = new GregorianCalendar(2024,6,10,15,50);//May 10 2024 3:50 PM
+        cbs.getTheater(0).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
+        boolean[][] layout2 = {
+            {false,true,true,true,false},
+            {true,true,true,true,false},
+            {true,false,true,true,true},
+            {true,true,true,true,true},
+        };
+        cbs.addTheater("A2",layout2);
+        c = new GregorianCalendar(2024,6,10,12,0);//May 10 2024 12:00 PM
+        cbs.getTheater(1).setShowing(0, new Show("Mystery movie","Suspensful movie that scares you",c.getTime()));
+        c = new GregorianCalendar(2024,6,10,13,30);//May 10 2024 4:00 PM
+        cbs.getTheater(1).setShowing(1, new Show("Action movie","Thrilling movie with cool vfx",c.getTime()));
+        c = new GregorianCalendar(2024,6,10,17,0);//May 10 2024 5:00 PM
+        cbs.getTheater(1).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
+        cbs.printSchedule(0,-1);
+    }
+    
     /**
      * Accessor Method for maxShowings
      * @return  int  the maximum number of showings each theater in the system can hold
@@ -44,6 +77,16 @@ public class CinemaBookingSystem
     public void addTheater(String name, boolean[][] layout)
     {
         theaters.add(new Theater(name,layout,maxShowings));
+    }
+    
+    /**
+     * Reads a theater at a given index
+     * 
+     * @return Theater The theater at the index
+     */
+    public Theater getTheater(int index)
+    {
+        return theaters.get(index);
     }
     
     /**
@@ -114,19 +157,19 @@ public class CinemaBookingSystem
     /**
      * Prints the entire CBS schedule in chronological order
      */
-    public void printSchedule(long start)
+    public void printSchedule(long start, int lIndex)
     {
         Date earliest = new Date(0);
         Date last = new Date(start);
         int tIndex = -1;
         int sIndex = -1;
-        //Find the earliest 
+        //Find the earliest showing
         for(int i = 0; i < theaters.size(); i++)
         {
             for(int a = 0; a < maxShowings; a++)
             {
                 Date b = theaters.get(i).getShowing(a).getDate();
-                if((b.before(earliest) || earliest.equals(new Date(0))) && b.after(last))
+                if((b.before(earliest) || earliest.equals(new Date(0))) && (b.after(last) || (b.equals(last) && i > lIndex)))
                 {
                     tIndex = i;
                     sIndex = a;
@@ -139,13 +182,28 @@ public class CinemaBookingSystem
         {   //getTime converts the date to a long
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(earliest);
+            String hour = "" + c.get(Calendar.HOUR);
+            if(c.get(Calendar.HOUR) == 0)
+            {
+                hour = "12";
+            }
+            String period = "PM";
+            if(c.get(Calendar.AM_PM) == 0) 
+            {
+                period = "AM";
+            }
+            String min = "" + c.get(Calendar.MINUTE); // :0x for minutes less than 10
+            if(c.get(Calendar.MINUTE) < 10)
+            {
+                min = "0" + min;
+            }
             //
             System.out.println(theaters.get(tIndex).getShowing(sIndex).getName() +
-            "Airing in "+ theaters.get(tIndex).getName() + "on:" + 
+            " Airing in theater "+ theaters.get(tIndex).getName() + " on:" + 
             c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + //+1 beacuse January is 0 for some reason
-            c.get(Calendar.YEAR));
+            c.get(Calendar.YEAR) + " at " + hour + ":" + min + " " + period);
             System.out.println(theaters.get(tIndex).getShowing(sIndex).getDescription());
-            printSchedule(earliest.getTime());//Recursive call to function with th
+            printSchedule(earliest.getTime(),tIndex);//Recursive call to function searching for only after this entry
         }
     }
     /**

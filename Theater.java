@@ -11,7 +11,7 @@ public class Theater
     private String name;
     private String[][] layout;
     private String[][][] seats; //[showing][row][column]
-    private Show[] schedule; //(will add once others are done)
+    private Show[] schedule; //The schedule of the theater
     /**
      * Constructor for objects of class Theater
      */
@@ -38,6 +38,7 @@ public class Theater
         {
             seats[i] = this.layout;
         }
+        schedule = new Show[maxShowings];
     }
     
     /**

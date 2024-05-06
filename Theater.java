@@ -33,10 +33,13 @@ public class Theater
                 }
             }
         }
-        this.layout = seats[0];
+        this.layout = seats[0].clone();
         for(int i = 0; i < maxShowings; i++)
         {
-            seats[i] = this.layout;
+            for(int c = 0; c < layout.length; c++) //deep copy
+            {
+                seats[i][c] = this.layout[c].clone();
+            } 
         }
         schedule = new Show[maxShowings];
     }
@@ -62,12 +65,12 @@ public class Theater
     /**
      * Cancels a reservation of a seat
      * 
-     * @param  show  The index of the show that is being reserved
-     * @param  row  The row of the seat being reserved
-     * @param  col  The column of the seat being reserved
-     * @return boolean  Whether or not the seat was available.
+     * @param  show  The index of the target show
+     * @param  row  The row of the reservation to cancel
+     * @param  col  The column of the reservation to cancel
+     * @return boolean  Whether or not the seat was valid.
      */
-    public boolean cancelReservation(int show, int row, int col, String phone)
+    public boolean cancelReservation(int show, int row, int col)
     {
         if(seats[show][row][col].equals("              "))
         {
@@ -75,6 +78,22 @@ public class Theater
         }
         seats[show][row][col] = "seat available"; //make the seat available to reserve
         return true; //the seat is taken
+    }
+    
+    /**
+     * Cancels a row of reservations
+     * 
+     * @param  show  The index of the target show
+     * @param  row  The row of the reservations being cancelled
+     * @param  sCol  The starting column of the reservations being cancelled, inclusive
+     * @param  eCol  The ending column of the reservations being cancelled, exclusive
+     */
+    public void cancelRange(int show, int row, int sCol, int eCol)
+    {
+        for(int i = sCol; i < eCol; i++)
+        {
+            cancelReservation(show,row,i);
+        }
     }
     
     /**
@@ -153,15 +172,18 @@ public class Theater
      */
     public void updateSchedule(Date date)
     {
-        if(schedule[0] != null && schedule[0].getDate().before(date)) //has the showing passed?
+        if((schedule[0].getDate().equals(new Date (0)) == false) && schedule[0].getDate().before(date)) //has the showing passed?
         {
             for(int i = 0; i < schedule.length - 1; i++)
             {
                 schedule[i] = schedule[i+1]; //shift schedules over
-                seats[i] = seats[i+1]; //shift seatings over to match
+                seats[i] = seats[i+1].clone(); //shift seatings over to match
             }
-            schedule[schedule.length - 1] = null;//no show constructor atm, it makes a blank one
-            seats[schedule.length - 1] = layout;
+            schedule[schedule.length - 1] = new Show("Blank","Blank",new Date(0));
+            for(int c = 0; c < layout.length; c++)
+            {
+                seats[schedule.length - 1][c] = this.layout[c].clone();
+            }
             updateSchedule(date); //Recursive check in case multiple shows pass
         }
     }
@@ -196,6 +218,11 @@ public class Theater
         //[              ] null seat
     }
     
+    /**
+     * Returns the name of the theater
+     * 
+     * @return String The name of the theater
+     */
     public String getName()
     {
         return name;

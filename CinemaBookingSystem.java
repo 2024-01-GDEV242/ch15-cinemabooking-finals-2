@@ -57,8 +57,29 @@ public class CinemaBookingSystem
         cbs.getTheater(1).setShowing(1, new Show("Action movie","Thrilling movie with cool vfx",c.getTime()));
         c = new GregorianCalendar(2024,6,10,17,0);//May 10 2024 5:00 PM
         cbs.getTheater(1).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
-        cbs.printSchedule(0,-1);
+        cbs.printSchedule();
         cbs.printSeating(0,0);
+        if(cbs.reserveSeat(0,0,1,1,"1-908-444-5825")) //valid seat
+        {
+            System.out.println("return test success");
+        }
+        cbs.reserveSeat(0,0,0,0,"1-908-425-5723"); //null seat
+        if(cbs.reserveSeat(0,0,1,1,"1-908-321-1865")) //taken seat
+        {
+            System.out.println("return test fail");
+        } 
+        cbs.reserveRange(0,1,1,0,3,"1-483-358-2922");
+        cbs.reserveRange(0,1,0,0,4,"1-411-325-2942"); //Some seats are invalid, all fail
+        cbs.printSeating(0,0); //only 5825 is displayed
+        cbs.printSeating(0,1); //only 
+        cbs.printSeating(0,2);
+        c = new GregorianCalendar(2024,6,10,1,0);
+        //demonstrate the schedules shifting
+        System.out.println("Updated");
+        cbs.updateSchedule(c.getTime());
+        cbs.printSeating(0,0);
+        cbs.printSeating(0,1);
+        cbs.printSeating(0,2);
     }
     
     /**
@@ -127,6 +148,35 @@ public class CinemaBookingSystem
     }
     
     /**
+     * Cancels a reservation of a seat
+     * 
+     * @param  tIndex  The index of the target theater
+     * @param  sIndex  The index of the target show
+     * @param  row  The row of the reservation to cancel
+     * @param  col  The column of the reservation to cancel
+     * @return boolean  Whether or not the seat was valid.
+     */
+    public boolean cancelReservation(int tIndex, int sIndex, int row, int col)
+    {
+        boolean value = theaters.get(tIndex).cancelReservation(sIndex,row,col);
+        return value;
+    }
+    
+    /**
+     * Cancels a row of reservations
+     * 
+     * @param  tIndex  The index of the target theater
+     * @param  sIndex  The index of the target show
+     * @param  row  The row of the reservations being cancelled
+     * @param  sCol  The starting column of the reservations being cancelled, inclusive
+     * @param  eCol  The ending column of the reservations being cancelled, exclusive
+     */
+    public void cancelRange(int tIndex, int sIndex, int row, int sCol, int eCol)
+    {
+        theaters.get(tIndex).cancelRange(sIndex,row,sCol,eCol);
+    }
+    
+    /**
      * Reserves a range of seats if all are empty (and they exist).
      * Will not reserve any seats in the row if any are taken.
      *
@@ -158,7 +208,18 @@ public class CinemaBookingSystem
     /**
      * Prints the entire CBS schedule in chronological order
      */
-    public void printSchedule(long start, int lIndex)
+    public void printSchedule()
+    {
+        printSchedule(0,-1);
+    }
+    
+    /**
+     * printSchedule() only gets called with the params other than 0 and -1 internally during recursion. 
+     * 
+     * @param start The start date of the search
+     * @param lIndex The index of the last theater printed. 
+     */
+    private void printSchedule(long start, int lIndex)
     {
         Date earliest = new Date(0);
         Date last = new Date(start);
@@ -184,7 +245,7 @@ public class CinemaBookingSystem
             Theater t = theaters.get(tIndex);
             System.out.println(t.getShowing(sIndex).getName() +
             " Airing in theater "+ t.getName() + " on: " + t.getShowing(sIndex).timeString());
-            System.out.println(theaters.get(tIndex).getShowing(sIndex).getDescription());
+            System.out.println("Description: " + t.getShowing(sIndex).getDescription());
             printSchedule(earliest.getTime(),tIndex);//Recursive call to function searching for only after this entry
         }
     }

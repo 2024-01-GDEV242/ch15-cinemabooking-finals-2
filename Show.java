@@ -65,12 +65,22 @@ public class Show
     
     /**
      * Gets the date of the show.
-     * Date has no mutator because changing it while in use can make things explode.
+     * 
      * @return Date the date the show starts
      */
     public Date getDate()
     {
         return date;
+    }
+    
+    /**
+     * Changes the date of the show.
+     * 
+     * @param date the date the show starts
+     */
+    public void setDate(Date date)
+    {
+        this.date = date;
     }
     
     /**

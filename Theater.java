@@ -176,7 +176,7 @@ public class Theater
         {
             for(int i = 0; i < schedule.length - 1; i++)
             {
-                schedule[i] = schedule[i+1]; //shift schedules over
+                schedule[i] = new Show(schedule[i+1].getName(),schedule[i+1].getDescription(),schedule[i+1].getDate()); //shift schedules over
                 seats[i] = seats[i+1].clone(); //shift seatings over to match
             }
             schedule[schedule.length - 1] = new Show("Blank","Blank",new Date(0));

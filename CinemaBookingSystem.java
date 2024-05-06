@@ -53,7 +53,7 @@ public class CinemaBookingSystem
         cbs.addTheater("A2",layout2);
         c = new GregorianCalendar(2024,6,10,12,0);//May 10 2024 12:00 PM
         cbs.getTheater(1).setShowing(0, new Show("Mystery movie","Suspensful movie that scares you",c.getTime()));
-        c = new GregorianCalendar(2024,6,10,13,30);//May 10 2024 4:00 PM
+        c = new GregorianCalendar(2024,6,10,16,0);//May 10 2024 4:00 PM
         cbs.getTheater(1).setShowing(1, new Show("Action movie","Thrilling movie with cool vfx",c.getTime()));
         c = new GregorianCalendar(2024,6,10,17,0);//May 10 2024 5:00 PM
         cbs.getTheater(1).setShowing(2, new Show("Romance movie","Titanic 2 in real",c.getTime()));
@@ -73,7 +73,7 @@ public class CinemaBookingSystem
         cbs.printSeating(0,0); //only 5825 is displayed
         cbs.printSeating(0,1); //only 
         cbs.printSeating(0,2);
-        c = new GregorianCalendar(2024,6,10,1,0);
+        c = new GregorianCalendar(2024,6,10,12,30);
         //demonstrate the schedules shifting
         System.out.println("Updated");
         cbs.updateSchedule(c.getTime());
@@ -195,6 +195,8 @@ public class CinemaBookingSystem
     /**
      * Updates all Theaters to the provided time, removing any showings that have passed from shedules.
      * Clears layouts of showings and shifts the arrays, leaving the last entry blank.
+     * If updated to exactly the time of a showing then causes unexpected behavior.
+     * 
      * @param date The Date/Time to update to.
      */
     public void updateSchedule(Date date)

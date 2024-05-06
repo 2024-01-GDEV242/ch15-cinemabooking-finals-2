@@ -60,6 +60,24 @@ public class Theater
     }
     
     /**
+     * Cancels a reservation of a seat
+     * 
+     * @param  show  The index of the show that is being reserved
+     * @param  row  The row of the seat being reserved
+     * @param  col  The column of the seat being reserved
+     * @return boolean  Whether or not the seat was available.
+     */
+    public boolean cancelReservation(int show, int row, int col, String phone)
+    {
+        if(seats[show][row][col].equals("              "))
+        {
+            return false; //the seat is null and can't be overwritten
+        }
+        seats[show][row][col] = "seat available"; //make the seat available to reserve
+        return true; //the seat is taken
+    }
+    
+    /**
      * Internal method of reserveRow that checks the availibility of seats
      * 
      * @param  show  The index of the show that is being reserved

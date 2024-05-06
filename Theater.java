@@ -1,6 +1,6 @@
 import java.util.Date;
 /**
- * Write a description of class Theater here.
+ * The Theater class holds seating charts and a schedule of Shows to screen.
  *
  * @author Andrew Steidle
  * @version 2024.4.28

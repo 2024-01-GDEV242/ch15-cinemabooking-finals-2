@@ -196,6 +196,7 @@ public class CinemaBookingSystem
      * Updates all Theaters to the provided time, removing any showings that have passed from shedules.
      * Clears layouts of showings and shifts the arrays, leaving the last entry blank.
      * If updated to exactly the time of a showing then causes unexpected behavior.
+     * I have no idea why that happens because it shouldn't do anything if the date is the same
      * 
      * @param date The Date/Time to update to.
      */
